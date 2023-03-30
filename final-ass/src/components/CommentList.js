@@ -1,17 +1,10 @@
-import React, { useState } from "react";
-import "./CommentList.css";
+import React from "react";
+
+import Feedback from "./Feedback";
+
 
 const CommentList = (props) => {
-    const [num, setNum] = useState(0);
-
-    const incr = () =>{
-        setNum(num+1);
-    }
-    const decr = () =>{
-         if (num>=1)
-            setNum(num-1)
-        else setNum(0)    
-    }
+ 
   return (
     <div className="container">
         <h2>COMMENTS</h2>
@@ -19,31 +12,21 @@ const CommentList = (props) => {
             <div className="cmntlist" key={cmnt.id}>
             <div className="box">
                 <div className="userN">
-                    <i class="bi bi-person-circle"></i>
-                    <span>{cmnt.userName}</span>
+                    <i className="bi bi-person-circle"></i>
+                    <span className="text">{cmnt.userName}</span>
                 </div>
                 <div className="cmnts">
-                    <i class="bi bi-chat-right-text"></i>
+                    <i className="bi bi-chat-right-text"></i>
                     <span>{cmnt.comment}</span>
                 </div>
-                <div className="feedback">
-                    <div className="likes">
-                        <i onClick={incr} class="bi bi-hand-thumbs-up"></i>
-                        <span>{num} </span>
-                    </div>
-                    <div className="dislike">
-                        <i onClick={decr} class="bi bi-hand-thumbs-down"></i>
-                        
-                    </div>
-                </div>
+                <Feedback />            
             </div>
             <div className="delete">
-                <i class="bi bi-trash" onClick={()=> props.getCmnt(cmnt.id)}></i>
+                <i data-title="Edit" className="bi bi-pencil-square" onClick={()=> props.getEditId(cmnt.id)}></i>
+                <i data-title="Delete" className="bi bi-trash" onClick={()=> props.getCmntId(cmnt.id)}></i>
             </div>            
         </div>
-        ))}
-        
-        
+        ))}       
     </div>
   );
 };
